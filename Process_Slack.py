@@ -4,12 +4,13 @@
 import json
 import os
 import datetime
+import glob
 
 settings = {
-    "source"            : r"sample_data\2015-09-02.json",
-    "users"             : r"sample_data\users.json",
-    "output"            : r"sample_data\AMA_20150902.html",
-    "title"             : "#AMA - Gary Gale of What3Words - September 2nd, 2015"
+    "source"            : "",
+    "users"             : "",
+    "output"            : "",
+    "title"             : "Example Title",
     "keepChannelJoins"  : False
 }
 
@@ -52,9 +53,8 @@ def main():
     users = returnUsers(settings["users"])
 
     print("Gathering files")
-    file = settings["source"]
-
-    startDate, endDate = os.path.basename(files[0])[:-5], os.path.basename(files[-1])[:-5]
+    target = os.path.join(settings["source"], "*.json")
+    files = glob.glob(target)
 
     print("Opening output")
     
